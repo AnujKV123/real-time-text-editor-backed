@@ -1,0 +1,1 @@
+export const DB_NAME = "real_time_editor_db"
