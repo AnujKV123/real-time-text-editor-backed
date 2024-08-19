@@ -70,7 +70,7 @@ const registerUser = asyncHandler(async (req, res) =>{
         email,
         password,
         subscription_plan,
-        username: username.toLowerCase()
+        username: username
     })
     // remove password and refresh token field from the response
     const createdUser = await User.findById(user._id).select("-password -refreshToken")
