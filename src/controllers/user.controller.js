@@ -208,9 +208,11 @@ const refreshAccessToken = asyncHandler( async(req, res)=>{
 })
 
 const changeCurrentPassword = asyncHandler( async(req, res) =>{
-    const {oldPassword, newPassword} = req.body
+    const {oldPassword, newPassword, userName} = req.body
 
-    const user = await User.findById(req.user?._id)
+    // const user = await User.find(req.user?._id)
+    
+    const user = await User.findOne({username: userName})
     const isPasswordCorreact = await user.isPasswordCorreact(oldPassword)
 
     if(!isPasswordCorreact){
