@@ -278,8 +278,6 @@ const updateUserAvatar = asyncHandler(async(req, res)=>{
     )
 })
 
-
-
 const getDocuments = asyncHandler(async(req, res) =>{
     const {fullname, email}=  req.body
     if(!(fullname || email)){
