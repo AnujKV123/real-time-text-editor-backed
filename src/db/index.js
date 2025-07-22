@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "../constants.js";
-import User from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 
 
 // note :- database always in another continent
