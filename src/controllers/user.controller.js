@@ -147,15 +147,12 @@ const updateUserAvatar = asyncHandler(async(req, res)=>{
         throw new ApiError(400, "Error while uploading on avatar");
     } 
 
-    const user = await User.findByIdAndUpdate(
-        req.user?._id,
-        {
-            $set: {
-                avatar: avatar.url
-            },
-        },
-        {new: true}
-    ).select("-password")
+    const user  = await user.find({email: req.user.email})
+    if(!user){
+        throw new ApiError(400, "User not found");
+    }
+    user.avatar = avatar.url
+    await user.save()
 
     return res.status(200)
     .json(
