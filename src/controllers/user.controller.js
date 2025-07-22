@@ -147,7 +147,7 @@ const updateUserAvatar = asyncHandler(async(req, res)=>{
         throw new ApiError(400, "Error while uploading on avatar");
     } 
 
-    const user  = await user.find({email: req.user.email})
+    const user  = await User.findOne({email: req.user.email})
     if(!user){
         throw new ApiError(400, "User not found");
     }
