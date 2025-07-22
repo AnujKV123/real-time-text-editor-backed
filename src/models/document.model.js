@@ -1,15 +1,52 @@
-import {Schema, model} from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 const documentSchema = new Schema({
-  _id: String,
-  data: Object,
-  document_name: String,
-  user_email: String,
-  shared_with: [{
-    email: String,
-    full_name: String
+  // _id: String,
+  name: {
+    type: String,
+    require: true,
+    trim: true,
+  },
+
+  type: {
+    type: String,
+    enum: ['text', 'code', 'canvas'],
+    required: true,
+  },
+
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+
+  activeSession: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CollabSession',
+  },
+
+  withTeam: {
+    type:Boolean,
+    default: false,
+  },
+
+  lastSession: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CollabSession',
+  },
+
+  collaborators: [{
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    invitedAt: { type: Date, default: Date.now },
+    acceptedAt: { type: Date },
   }],
+
+  content: {
+    type: String,
+    default: '',
+  },
+
 }, {timestamps: true})
 
-const Document = model("Document", documentSchema)
+const Document = mongoose.model("Document", documentSchema)
 export default Document

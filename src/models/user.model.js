@@ -6,46 +6,30 @@ import bcrypt from "bcrypt"
 const userSchema = new Schema({
     username:{
         type: String,
-        require: true,
-        unique: true,
-        lowcase: true,
+        required: true,
         trim: true,
-        index: true
     },
     email:{
         type: String,
-        require: true,
+        required: true,
         unique: true,
-        lowcase: true,
-        trim: true
-    },
-    fullname:{
-        type: String,
-        require: true,
+        lowercase: true,
         trim: true,
         index: true
     },
     avatar:{
         type: String, // cloudinary url
-        require: true,
+        required: true,
     },
-    subscription_plan:{
+    role:{
         type: String, 
-        require: true,
+        required: true,
     },
-    // watchHistory: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: "Video"
-    //     }
-    // ],
-    password: {
+    phone_number: {
         type: String,
-        require: [true, 'Password is required']
     },
-    refreshToken: {
+    provider: {
         type: String,
-
     }
 }, {timestamps: true})
 

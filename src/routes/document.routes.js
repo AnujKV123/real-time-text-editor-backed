@@ -1,15 +1,21 @@
-
 import { Router } from "express";
-import { updateDocumentName, CreateDocument, isVerifiedUser } from "../controllers/document.contraoller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import {
+  createDocument,
+  deleteDocument,
+  updateDocument,
+  getDocuments,
+  getDocumentById,
+  verifyUser,
+} from "../controllers/document.controller.js";
+import { verifyToken } from "../middlewares/AuthMiddleware.js";
 
+const router = Router();
 
-const router = Router()
-
-
-router.route("/update-document-name").post(verifyJWT, updateDocumentName)
-router.route("/create-document").post(verifyJWT, CreateDocument)
-router.route("/verify-user").post(verifyJWT, isVerifiedUser)
-
+router.route("/create-document").post(verifyToken, createDocument);
+router.route("/delete-document").post(verifyToken, deleteDocument);
+router.route("/update-document").patch(verifyToken, updateDocument);
+router.route("/get-documents").post(verifyToken, getDocuments);
+router.route("/get-document-by-id").post(verifyToken, getDocumentById);
+router.route("/verify-user").post(verifyToken, verifyUser);
 
 export default router;
