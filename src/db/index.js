@@ -10,8 +10,8 @@ const connectDB = async ()=> {
         console.log(`\n MongoDB connected !! DB Host: ${connectionInstance.connection.host}`)
 
         // Note : uncomment this if you want to sync indexes
-        await User.syncIndexes();
-        console.log("Indexes synced for User collection");
+        // await User.syncIndexes();
+        // console.log("Indexes synced for User collection");
 
     }catch(error){
         console.log("MONGODB connection error ", error);
