@@ -68,7 +68,7 @@ const deleteDocument = asyncHandler(async (req, res) => {
 
 
 const updateDocument = asyncHandler(async (req, res) => {
-  const { content, documentId } = req.body;
+  const { content, documentId, chat } = req.body;
 
   if (!content || !documentId) {
     throw new ApiError(400, "content and sessionId is required");
@@ -80,8 +80,11 @@ const updateDocument = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Document not found");
   }
 
-
+  if (chat) {
+    document.chat = chat;
+  }
   document.content = content;
+
   await document.save();
 
   return res
@@ -201,7 +204,7 @@ const verifyUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, {content: document.content}, "user verified successfully"));
+    .json(new ApiResponse(200, {content: document.content, chat: document.chat}, "user verified successfully"));
 });
 
 export {
